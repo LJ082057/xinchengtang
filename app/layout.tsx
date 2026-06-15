@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import MusicToggle from "./components/MusicToggle";
+import HeaderBg from "./components/HeaderBg";
 
 export const metadata: Metadata = {
   title: "心诚堂 · 为家人祈福求灵签",
@@ -79,6 +80,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               style={{left:p.l,top:p.t,animationDelay:p.d,animationDuration:'5s',animationIterationCount:'infinite'}} />
           ))}
         </div>
+
+        {/* Header背景 - 滚动时显示 */}
+        <HeaderBg />
 
         {/* 导航 */}
         <header className="fixed top-0 z-50 h-14 w-full transition-all duration-base safe-top bg-transparent">
