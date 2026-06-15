@@ -34,44 +34,55 @@ export default function BaziPage() {
     setReasoning("");
     setStreaming(true);
 
-    const res = await fetch("/api/bazi", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ year, month, day, hour, gender, master }),
-    });
+    try {
+      const res = await fetch("/api/bazi", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ year, month, day, hour, gender, master }),
+      });
 
-    if (!res.ok || !res.body) {
+      if (!res.ok) {
+        setLoading(false);
+        setStreaming(false);
+        setResult("服务暂时不可用，请稍后再试。");
+        return;
+      }
+
+      if (!res.body) {
+        setLoading(false);
+        setStreaming(false);
+        setResult("响应异常，请稍后再试。");
+        return;
+      }
+
       setLoading(false);
-      setStreaming(false);
-      return;
-    }
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
 
-    setLoading(false);
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = "";
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
 
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop() || "";
 
-      const lines = buffer.split("\n");
-      buffer = lines.pop() || ""; // 保留最后一个不完整的行
-
-      for (const line of lines) {
-        if (line.startsWith("REASONING:")) {
-          setReasoning(prev => prev + line.slice(10));
-        } else if (line.startsWith("CONTENT:")) {
-          setResult(prev => prev + line.slice(8));
+        for (const line of lines) {
+          if (line.startsWith("REASONING:")) {
+            setReasoning(prev => prev + line.slice(10));
+          } else if (line.startsWith("CONTENT:")) {
+            setResult(prev => prev + line.slice(8));
+          }
         }
       }
-    }
-    // 处理最后的buffer
-    if (buffer.startsWith("REASONING:")) {
-      setReasoning(prev => prev + buffer.slice(10));
-    } else if (buffer.startsWith("CONTENT:")) {
-      setResult(prev => prev + buffer.slice(8));
+      if (buffer.startsWith("REASONING:")) {
+        setReasoning(prev => prev + buffer.slice(10));
+      } else if (buffer.startsWith("CONTENT:")) {
+        setResult(prev => prev + buffer.slice(8));
+      }
+    } catch (e) {
+      setResult("网络错误，请检查网络后重试。");
     }
     setStreaming(false);
   };
