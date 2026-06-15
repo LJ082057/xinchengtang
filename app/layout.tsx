@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="zh-CN">
       <body className="antialiased">
-        {/* 背景层 - 深紫星空 */}
+        {/* 背景层 */}
         <div className="fixed inset-0 z-0" style={{
           background: "linear-gradient(180deg, #0d0a1a 0%, #151029 40%, #1a1435 70%, #0d0a1a 100%)"
         }} />
@@ -69,50 +69,59 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         }} />
 
         {/* 顶部金色光 */}
-        <div className="fixed inset-x-0 top-0 z-0 h-32 bg-gradient-to-b from-gold/10 to-transparent" />
+        <div className="fixed inset-x-0 top-0 z-0 h-32 bg-gradient-to-b from-gold/15 to-transparent" />
         
         {/* 浮动光点 */}
         <div className="pointer-events-none fixed inset-0 z-0">
           {[{l:'15%',t:'25%',d:'0s'},{l:'35%',t:'60%',d:'1.5s'},{l:'55%',t:'35%',d:'2.8s'},{l:'75%',t:'70%',d:'0.8s'},{l:'88%',t:'20%',d:'3.5s'}].map((p,i) => (
-            <span key={i} className="absolute size-1.5 rounded-full bg-purple/50 animate-glow-rise"
+            <span key={i} className="absolute size-1.5 rounded-full bg-gold/40 animate-glow-rise"
               style={{left:p.l,top:p.t,animationDelay:p.d,animationDuration:'5s',animationIterationCount:'infinite'}} />
           ))}
         </div>
 
         {/* 导航 */}
-        <header className="fixed top-0 z-50 h-14 w-full bg-transparent">
+        <header className="fixed top-0 z-50 h-14 w-full transition-all duration-base safe-top bg-transparent">
           <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4">
             <a className="flex items-center gap-2.5" href="/">
-              <span className="text-2xl" style={{
+              <span className="text-[1.4rem] md:text-[1.65rem]" style={{
                 fontFamily:"'ZhiMangXing',cursive",
-                background:"linear-gradient(180deg, #e0d5ff 0%, #d4a843 50%, #8b6914 100%)",
+                background:"linear-gradient(180deg, #f5e6b8 0%, #c9a05c 50%, #8b6914 100%)",
                 WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",
-                letterSpacing:"0.12em"
+                letterSpacing:"0.12em",
+                filter:"drop-shadow(0 1px 2px rgba(0,0,0,0.3))"
               }}>心诚堂</span>
             </a>
             <nav className="hidden items-center gap-5 md:flex">
               {navLinks.map(l => (
-                <a key={l.href} className="text-sm text-paper-dark hover:text-gold transition-colors" href={l.href}>{l.label}</a>
+                <a key={l.href} className="font-body text-sm transition-colors duration-fast hover:text-gold text-paper-dark" href={l.href}>{l.label}</a>
               ))}
-              <button className="text-sm text-paper-dark hover:text-gold transition-colors">🎵</button>
-              <a href="/profile/" className="rounded-full border border-gold/40 px-3 py-1 text-xs text-gold hover:bg-gold/10 transition-colors">
+              <button className="relative inline-flex size-9 items-center justify-center rounded-full border transition-colors border-gold/25 text-paper-dark hover:border-gold/40 hover:text-gold">
+                🎵
+              </button>
+              <a href="/profile/" className="inline-flex items-center gap-2 rounded-full border border-gold/30 px-3 py-1.5 text-sm text-gold hover:bg-gold/10 transition-colors">
                 找回记录
               </a>
             </nav>
           </div>
-          <div className="gold-divider opacity-0 transition-opacity" />
+          <div className="gold-divider opacity-0 transition-opacity duration-slow" />
         </header>
 
         {/* 主内容 */}
-        <main className="relative z-10 mx-auto min-h-screen w-full pt-14 pb-24 md:pb-8">
+        <main className="relative z-10 mx-auto min-h-[calc(100vh-3.5rem)] w-full pt-14 pb-24 md:pb-8">
           {children}
         </main>
 
+        {/* ShareFAB - 分享赚福报 */}
+        <button className="fixed right-3 z-40 flex size-10 items-center justify-center rounded-full border border-gold/50 bg-gradient-to-br from-gold/35 via-gold/20 to-vermillion/20 text-gold shadow-lg shadow-gold/20 backdrop-blur-sm hover:scale-110 transition-all duration-fast md:hidden"
+          title="分享赚福报金">
+          📤
+        </button>
+
         {/* 底部导航（移动端） */}
-        <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-purple/20 bg-xuan-card/97 backdrop-blur-md md:hidden">
+        <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-gold/20 bg-xuan-card/97 backdrop-blur-md md:hidden">
           <div className="grid grid-cols-6 px-1 pb-[max(env(safe-area-inset-bottom),0.5rem)] pt-2">
             {bottomTabs.map(n => (
-              <a key={n.href} className="flex flex-col items-center gap-0.5 py-2 text-xs text-paper-dark" href={n.href}>
+              <a key={n.href} className="flex flex-col items-center gap-0.5 rounded-md px-0 py-2 text-xs transition-colors duration-fast text-ink-muted" href={n.href}>
                 <span className="text-[11px]">{n.label}</span>
               </a>
             ))}
