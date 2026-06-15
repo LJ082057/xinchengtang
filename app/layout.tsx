@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import MusicToggle from "./components/MusicToggle";
 
 export const metadata: Metadata = {
   title: "心诚堂 · 为家人祈福求灵签",
@@ -95,9 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {navLinks.map(l => (
                 <a key={l.href} className="font-body text-sm transition-colors duration-fast hover:text-gold text-paper-dark" href={l.href}>{l.label}</a>
               ))}
-              <button className="relative inline-flex size-9 items-center justify-center rounded-full border transition-colors border-gold/25 text-paper-dark hover:border-gold/40 hover:text-gold">
-                🎵
-              </button>
+              <MusicToggle />
               <a href="/profile/" className="inline-flex items-center gap-2 rounded-full border border-gold/30 px-3 py-1.5 text-sm text-gold hover:bg-gold/10 transition-colors">
                 找回记录
               </a>
