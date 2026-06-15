@@ -41,7 +41,7 @@ export default function Home() {
             background:"linear-gradient(180deg,#e0d5ff 0%,#d4a843 50%,#8b6914 100%)",
             WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",
             filter:"drop-shadow(0 2px 8px rgba(107,63,160,0.4))"
-          }}>菩提苑</h1>
+          }}>心诚堂</h1>
           <p className="mx-auto max-w-md text-base leading-loose text-paper-dark/85 md:text-lg">
             以古籍为根，以师父为引<br/>
             <span className="text-star/80">心诚则灵 · 一念慈悲 · 福报自来</span>
@@ -86,7 +86,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 为何选菩提苑 */}
+      {/* 为何选心诚堂 */}
       <section className="space-y-6 pb-section">
         <div className="rounded-lg border border-purple/20 bg-xuan-card/95 p-6 text-center space-y-4">
           <span className="inline-flex items-center rounded-full border border-purple/30 bg-gradient-to-r from-purple/20 to-gold/10 px-2.5 py-1 text-xs text-star">
@@ -95,7 +95,7 @@ export default function Home() {
           <h2 className="text-2xl tracking-widest md:text-3xl" style={{
             background:"linear-gradient(90deg,#d4a843,#f5e6b8,#d4a843)",
             WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"
-          }}>为何选菩提苑</h2>
+          }}>为何选心诚堂</h2>
           <div className="grid gap-4 md:grid-cols-3">
             {reasons.map((f, i) => (
               <div key={i} className="rounded-lg border border-purple/15 bg-xuan-surface/40 p-4 text-left">
@@ -130,7 +130,7 @@ export default function Home() {
             background:"linear-gradient(90deg,#d4a843,#f5e6b8,#d4a843)",
             WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"
           }}>分享传播</h2>
-          <p className="text-paper-dark/70 max-w-md mx-auto">好东西要与亲友分享。把菩提苑推荐给身边的人，让更多人受益于传统文化智慧。</p>
+          <p className="text-paper-dark/70 max-w-md mx-auto">好东西要与亲友分享。把心诚堂推荐给身边的人，让更多人受益于传统文化智慧。</p>
           <button className="h-10 px-6 rounded-lg border border-gold/40 text-gold hover:bg-gold/10 inline-flex items-center gap-2">
             <Sparkles className="size-4" /> 分享给好友
           </button>
@@ -143,7 +143,7 @@ export default function Home() {
           <p key={i} className={`leading-loose ${i === 0 ? 'text-gold/80' : i === 1 ? 'text-paper-dark/65' : 'text-star/50'}`}>{q}</p>
         ))}
         <div className="mx-auto w-12 border-t border-purple/15" />
-        <p className="text-xs text-paper-dark/60">菩提苑 · 一念慈悲，一灯长明</p>
+        <p className="text-xs text-paper-dark/60">心诚堂 · 一念慈悲，一灯长明</p>
       </footer>
     </div>
   );

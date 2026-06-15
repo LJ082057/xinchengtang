@@ -2,11 +2,11 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "菩提苑 · 为家人祈福求灵签",
+  title: "心诚堂 · 为家人祈福求灵签",
   description: "心诚则灵。为家人点一盏祈福灯，求一支关帝灵签，看一卦命理八字。一念慈悲，福报自来。",
-  keywords: "菩提苑,祈福,求签,关帝灵签,八字精批,命理,周公解梦,今日黄历,六爻占卜,手相图解,宝宝起名",
+  keywords: "心诚堂,祈福,求签,关帝灵签,八字精批,命理,周公解梦,今日黄历,六爻占卜,手相图解,宝宝起名",
   openGraph: {
-    title: "菩提苑 · 为家人祈福求灵签",
+    title: "心诚堂 · 为家人祈福求灵签",
     description: "心诚则灵。点一盏灯，求一支签，看一卦命。一念慈悲，福报自来。",
   },
 };
@@ -88,7 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 background:"linear-gradient(180deg, #e0d5ff 0%, #d4a843 50%, #8b6914 100%)",
                 WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",
                 letterSpacing:"0.12em"
-              }}>菩提苑</span>
+              }}>心诚堂</span>
             </a>
             <nav className="hidden items-center gap-5 md:flex">
               {navLinks.map(l => (
