@@ -126,7 +126,13 @@ export default function DreamPage() {
       <div className="transition-all duration-base rounded-lg border border-gold/20 bg-xuan-card/95 p-card-pad shadow-paper backdrop-blur-sm text-center space-y-3">
         <p className="text-sm text-gold">🙏 分享给好友 · 赚福报金</p>
         <p className="text-xs text-paper-dark/70">发给朋友解梦，双方各得 1 福报金</p>
-        <button className="inline-flex items-center gap-2 rounded-full border border-gold/30 px-4 py-2 text-sm text-gold hover:bg-gold/10 transition-all duration-fast">
+        <button onClick={() => {
+          if (navigator.share) {
+            navigator.share({ title: "心诚堂 · 周公解梦", text: "我刚在心诚堂解了个梦，你也来试试吧！", url: window.location.origin + "/dream/" }).catch(() => {});
+          } else {
+            navigator.clipboard.writeText(window.location.origin + "/dream/").then(() => alert("链接已复制！"));
+          }
+        }} className="inline-flex items-center gap-2 rounded-full border border-gold/30 px-4 py-2 text-sm text-gold hover:bg-gold/10 transition-all duration-fast active:scale-95">
           📤 分享赚福报
         </button>
       </div>

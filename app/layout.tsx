@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import MusicToggle from "./components/MusicToggle";
 import HeaderBg from "./components/HeaderBg";
+import ShareFAB from "./components/ShareFAB";
 
 export const metadata: Metadata = {
   title: "心诚堂 · 为家人祈福求灵签",
@@ -33,12 +34,12 @@ const navLinks = [
 ];
 
 const bottomTabs = [
-  { href: "/", label: "首页" },
-  { href: "/qifu/", label: "祈福" },
-  { href: "/almanac/", label: "黄历" },
-  { href: "/lottery/", label: "灵签" },
-  { href: "/bazi/", label: "八字" },
-  { href: "/dream/", label: "解梦" },
+  { href: "/", label: "首页", icon: "🏠" },
+  { href: "/qifu/", label: "祈福", icon: "🕯️" },
+  { href: "/almanac/", label: "黄历", icon: "📅" },
+  { href: "/lottery/", label: "灵签", icon: "📜" },
+  { href: "/bazi/", label: "八字", icon: "🔮" },
+  { href: "/dream/", label: "解梦", icon: "🌙" },
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -88,12 +89,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className="fixed top-0 z-50 h-14 w-full transition-all duration-base safe-top bg-transparent">
           <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4">
             <a className="flex items-center gap-2.5" href="/">
-              <span className="text-[1.4rem] md:text-[1.65rem]" style={{
-                fontFamily:"'ZhiMangXing',cursive",
+              <span style={{
+                fontFamily:"'ZhiMangXing', cursive",
+                fontSize:"1.6rem",
                 background:"linear-gradient(180deg, #f5e6b8 0%, #c9a05c 50%, #8b6914 100%)",
                 WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",
-                letterSpacing:"0.12em",
-                filter:"drop-shadow(0 1px 2px rgba(0,0,0,0.3))"
+                backgroundClip:"text",color:"transparent",
+                letterSpacing:"0.15em",
+                filter:"drop-shadow(0 1px 3px rgba(0,0,0,0.4))"
               }}>心诚堂</span>
             </a>
             <nav className="hidden items-center gap-5 md:flex">
@@ -105,27 +108,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 找回记录
               </a>
             </nav>
+            {/* 移动端：音乐按钮 */}
+            <div className="flex items-center gap-2 md:hidden">
+              <MusicToggle />
+            </div>
           </div>
           <div className="gold-divider opacity-0 transition-opacity duration-slow" />
         </header>
 
         {/* 主内容 */}
-        <main className="relative z-10 mx-auto min-h-[calc(100vh-3.5rem)] w-full pt-14 pb-24 md:pb-8">
+        <main className="relative z-10 mx-auto min-h-[calc(100vh-3.5rem)] w-full pt-14 pb-20 md:pb-8">
           {children}
         </main>
 
         {/* ShareFAB - 分享赚福报 */}
-        <button className="fixed right-3 z-40 flex size-10 items-center justify-center rounded-full border border-gold/50 bg-gradient-to-br from-gold/35 via-gold/20 to-vermillion/20 text-gold shadow-lg shadow-gold/20 backdrop-blur-sm hover:scale-110 transition-all duration-fast md:hidden"
-          title="分享赚福报金">
-          📤
-        </button>
+        <ShareFAB />
 
         {/* 底部导航（移动端） */}
         <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-gold/20 bg-xuan-card/97 backdrop-blur-md md:hidden">
-          <div className="grid grid-cols-6 px-1 pb-[max(env(safe-area-inset-bottom),0.5rem)] pt-2">
+          <div className="grid grid-cols-6 px-0.5 pb-[max(env(safe-area-inset-bottom),0.5rem)] pt-1.5">
             {bottomTabs.map(n => (
-              <a key={n.href} className="flex flex-col items-center gap-0.5 rounded-md px-0 py-2 text-xs transition-colors duration-fast text-ink-muted" href={n.href}>
-                <span className="text-[11px]">{n.label}</span>
+              <a key={n.href} className="flex flex-col items-center gap-0.5 py-1.5 text-paper-dark active:bg-gold/10 rounded-md transition-colors" href={n.href}>
+                <span className="text-base">{n.icon}</span>
+                <span className="text-[13px] font-medium">{n.label}</span>
               </a>
             ))}
           </div>

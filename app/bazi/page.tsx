@@ -57,6 +57,8 @@ export default function BaziPage() {
       buffer += decoder.decode(value, { stream: true });
 
       const lines = buffer.split("\n");
+      buffer = lines.pop() || ""; // 保留最后一个不完整的行
+
       for (const line of lines) {
         if (line.startsWith("REASONING:")) {
           setReasoning(prev => prev + line.slice(10));
@@ -64,6 +66,12 @@ export default function BaziPage() {
           setResult(prev => prev + line.slice(8));
         }
       }
+    }
+    // 处理最后的buffer
+    if (buffer.startsWith("REASONING:")) {
+      setReasoning(prev => prev + buffer.slice(10));
+    } else if (buffer.startsWith("CONTENT:")) {
+      setResult(prev => prev + buffer.slice(8));
     }
     setStreaming(false);
   };
