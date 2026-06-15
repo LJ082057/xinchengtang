@@ -2,11 +2,11 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "心诚堂 · 为家人祈福求灵签",
+  title: "菩提苑 · 为家人祈福求灵签",
   description: "心诚则灵。为家人点一盏祈福灯，求一支关帝灵签，看一卦命理八字。一念慈悲，福报自来。",
-  keywords: "心诚堂,祈福,求签,关帝灵签,八字精批,命理",
+  keywords: "菩提苑,祈福,求签,关帝灵签,八字精批,命理,周公解梦,今日黄历,六爻占卜,手相图解,宝宝起名",
   openGraph: {
-    title: "心诚堂 · 为家人祈福求灵签",
+    title: "菩提苑 · 为家人祈福求灵签",
     description: "心诚则灵。点一盏灯，求一支签，看一卦命。一念慈悲，福报自来。",
   },
 };
@@ -17,6 +17,27 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
 };
+
+const navLinks = [
+  { href: "/qifu/", label: "祈福" },
+  { href: "/almanac/", label: "今日黄历" },
+  { href: "/dream/", label: "周公解梦" },
+  { href: "/lottery/", label: "关帝灵签" },
+  { href: "/bazi/", label: "八字精批" },
+  { href: "/divination/", label: "六爻占卜" },
+  { href: "/palmistry/", label: "手相图解" },
+  { href: "/naming/", label: "宝宝起名" },
+  { href: "/meditation/", label: "静心禅坐" },
+];
+
+const bottomTabs = [
+  { href: "/", label: "首页" },
+  { href: "/qifu/", label: "祈福" },
+  { href: "/almanac/", label: "黄历" },
+  { href: "/lottery/", label: "灵签" },
+  { href: "/bazi/", label: "八字" },
+  { href: "/dream/", label: "解梦" },
+];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -32,12 +53,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {Array.from({length: 30}).map((_, i) => (
             <span key={i} className="absolute rounded-full bg-star/40 animate-star-twinkle"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                width: `${Math.random() * 3 + 1}px`,
-                height: `${Math.random() * 3 + 1}px`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${Math.random() * 3 + 2}s`,
+                left: `${(i * 3.33) % 100}%`,
+                top: `${(i * 7.77) % 100}%`,
+                width: `${(i % 3) + 1}px`,
+                height: `${(i % 3) + 1}px`,
+                animationDelay: `${(i * 0.5) % 5}s`,
+                animationDuration: `${(i % 3) + 2}s`,
               }} />
           ))}
         </div>
@@ -67,16 +88,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 background:"linear-gradient(180deg, #e0d5ff 0%, #d4a843 50%, #8b6914 100%)",
                 WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",
                 letterSpacing:"0.12em"
-              }}>心诚堂</span>
+              }}>菩提苑</span>
             </a>
             <nav className="hidden items-center gap-5 md:flex">
-              {[
-                {href:"/qifu/",label:"为家人祈福"},
-                {href:"/lottery/",label:"求灵签"},
-                {href:"/bazi/",label:"八字精批"},
-              ].map(l => (
+              {navLinks.map(l => (
                 <a key={l.href} className="text-sm text-paper-dark hover:text-gold transition-colors" href={l.href}>{l.label}</a>
               ))}
+              <button className="text-sm text-paper-dark hover:text-gold transition-colors">🎵</button>
+              <a href="/profile/" className="rounded-full border border-gold/40 px-3 py-1 text-xs text-gold hover:bg-gold/10 transition-colors">
+                找回记录
+              </a>
             </nav>
           </div>
           <div className="gold-divider opacity-0 transition-opacity" />
@@ -89,14 +110,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* 底部导航（移动端） */}
         <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-purple/20 bg-xuan-card/97 backdrop-blur-md md:hidden">
-          <div className="grid grid-cols-3 px-1 pb-[max(env(safe-area-inset-bottom),0.5rem)] pt-2">
-            {[
-              {href:"/",label:"首页",icon:"🔮"},
-              {href:"/qifu/",label:"祈福",icon:"🕯️"},
-              {href:"/lottery/",label:"灵签",icon:"📜"},
-            ].map(n => (
+          <div className="grid grid-cols-6 px-1 pb-[max(env(safe-area-inset-bottom),0.5rem)] pt-2">
+            {bottomTabs.map(n => (
               <a key={n.href} className="flex flex-col items-center gap-0.5 py-2 text-xs text-paper-dark" href={n.href}>
-                <span className="text-lg">{n.icon}</span>
                 <span className="text-[11px]">{n.label}</span>
               </a>
             ))}
