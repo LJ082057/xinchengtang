@@ -73,9 +73,9 @@ export default function NamingPage() {
             <div key={f.l} className="space-y-2">
               <p className="text-sm text-paper-dark/75">{f.l}</p>
               <div className="flex h-14 items-stretch rounded-xl border border-gold/30 bg-xuan-surface">
-                <button onClick={() => f.s(Math.max(f.min, f.value-1))} className="flex w-10 items-center justify-center text-paper-dark hover:bg-gold/10">▼</button>
+                <button onClick={() => f.s(Math.max(f.min, f.v-1))} className="flex w-10 items-center justify-center text-paper-dark hover:bg-gold/10">▼</button>
                 <div className="flex flex-1 items-center justify-center"><span className="text-xl text-gold">{f.v}</span></div>
-                <button onClick={() => f.s(Math.min(f.max, f.value+1))} className="flex w-10 items-center justify-center text-paper-dark hover:bg-gold/10">▲</button>
+                <button onClick={() => f.s(Math.min(f.max, f.v+1))} className="flex w-10 items-center justify-center text-paper-dark hover:bg-gold/10">▲</button>
               </div>
             </div>
           ))}
